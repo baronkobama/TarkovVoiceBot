@@ -19,9 +19,12 @@ class TarkovBot(discord.Bot):
 
         dotenv.load_dotenv()
 
+        intents = discord.Intents.default()
+        intents.members = True  # noqa
+
         super().__init__(
             debug_guilds=json.loads(os.getenv("DEBUG_GUILDS")),
-            intents=discord.Intents.all(),
+            intents=intents,
         )
 
     # --- Bot Launch Functions ---
