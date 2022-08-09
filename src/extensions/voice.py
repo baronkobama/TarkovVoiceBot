@@ -12,12 +12,15 @@ import discord
 # Local Modules
 from src.bot import TarkovBot
 
+__all__ = (
+    "Voice",
+)
+
 
 class Voice(commands.Cog):
     def __init__(self, bot: TarkovBot):
         self.bot = bot
 
-        self.api = ...
         self.sessions: dict[int, dict[int, discord.sinks.AudioData]] = {}  # {guild_id: {user_id: user_audio_data}}
 
     async def audio_data_monitor(self, ctx: discord.ApplicationContext, sink: discord.sinks.Sink) -> None:
@@ -64,5 +67,5 @@ class Voice(commands.Cog):
         # client.stop_recording()
 
 
-def setup(bot: TarkovBot):
+def setup(bot: TarkovBot) -> None:
     bot.add_cog(Voice(bot))

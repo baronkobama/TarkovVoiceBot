@@ -11,6 +11,11 @@ import discord
 import dotenv
 
 # Local Modules
+from src.core.api import TarkovDevAPI
+
+__all__ = (
+    "TarkovBot",
+)
 
 
 class TarkovBot(discord.Bot):
@@ -18,6 +23,8 @@ class TarkovBot(discord.Bot):
         self.__version__ = "1.0.0"
 
         dotenv.load_dotenv()
+
+        self.api = TarkovDevAPI()
 
         intents = discord.Intents.default()
         intents.members = True  # noqa
