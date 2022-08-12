@@ -40,18 +40,17 @@ class TarkovDevAPI:
                 raise RequestError(response.status, response.reason)
             return await response.json()
 
-    async def get_item_info(self, item_name: str) -> dict:
+    async def get_item_info(self, item_name: str, info: str | None = None) -> dict:
+        # info should be passed as a string with each requested parameter separated by a space
+        info = "name updated iconLink avg24hPrice link changeLast48hPercent" if not info else info
+        info = info.replace(" ", "\n\t\t")
         query = f"""
         {{
             items(name: "{item_name}") {{
-                name
-                updated
-                iconLink
-                avg24hPrice
-                link
-                changeLast48hPercent
+                {info}
             }}
         }}
         """
+        print(f"query: {query}")
         requested = await self.request(query)
         return requested
