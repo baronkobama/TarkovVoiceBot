@@ -51,6 +51,5 @@ class TarkovDevAPI:
             }}
         }}
         """
-        print(f"query: {query}")
         requested = await self.request(query)
         return requested
